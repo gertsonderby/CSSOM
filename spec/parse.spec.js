@@ -1028,6 +1028,63 @@ var TESTS = [
 
 			return result;
 		})()
+	},
+	{
+		input: 'body {color:red;}{color: green;font-size: 13px;}',
+		result: (function() {
+			var result = {
+				cssRules: [
+					{
+						selectorText: "body",
+						style: {
+							0: "color",
+							length: 1,
+							parentRule: "..",
+							color: "red"
+						},
+						parentRule: null,
+						parentStyleSheet: "../.."
+					}
+				],
+				parentStyleSheet: null
+			};
+			return result;
+		})()
+	},
+	{
+		input: 'body {color:red;}, *{color: green;font-size: 13px;}',
+		result: (function() {
+			var result = {
+				cssRules: [
+					{
+						selectorText: "body",
+						style: {
+							0: "color",
+							length: 1,
+							parentRule: "..",
+							color: "red"
+						},
+						parentRule: null,
+						parentStyleSheet: "../.."
+					},
+					{
+						parentRule: null,
+						parentStyleSheet: "../..",
+						selectorText: ", *",
+						style: {
+							0: "color",
+							1: "font-size",
+							length: 2,
+							parentRule: "..",
+							color: "green",
+							"font-size": "13px"
+						}
+					}
+				],
+				parentStyleSheet: null
+			};
+			return result;
+		})()
 	}
 ];
 
